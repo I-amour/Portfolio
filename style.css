@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    background-image: url('background.jpeg');
+    /*background-image: url('background.jpeg'); */
     background-size: cover; /* Ensure the background image covers the entire page */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent the image from repeating */
@@ -19,8 +19,18 @@ body {
     /* Removed overflow: hidden; to show scrollbar */
     scrollbar-color: #00eeff ; /* Color of the scrollbar thumb and track */
     scrollbar-width: thin; /* Make scrollbar thinner */
+    width: 100%;
+    height:100%;
 }
 
+canvas {
+    position: fixed;  /* Change from absolute to fixed to prevent it from moving with content */
+    top: 0;
+    left: 0;
+    z-index: -1;  /* Ensure it's in the background */
+    width: 100%;  /* Full width */
+    height: 100%; /* Full height */
+}
 
 ::-webkit-scrollbar {
     width: 12px; /* Width of the scrollbar */
@@ -160,27 +170,34 @@ footer {
 }
 
 .typing-section {
-    display: flex;
-    flex-direction: column; /* Stack the typing effects vertically */
-    justify-content: center; /* Center vertically */
-    align-items: flex-start; /* Align text to the left */
-    padding: 50px;
-    height: 100vh; /* Full viewport height */
-    background-size: cover; /* Cover the entire section */
-    background-position: center; /* Center the background image */
-    color: #00eeff; /* Neon green color for text */
-}
 
+    position: relative; /* Ensure this section is positioned relative to the page */
+    z-index: 1; /* This keeps it above the canvas */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff; /* Neon green color for text */
+}
 .typing-effect {
+    border-radius: 15px;
+    background-color: #69f5ff46;
     font-size: 3rem; /* Large text size */
     font-weight: bold;
     white-space: nowrap; /* Prevent text wrapping */
     overflow: hidden; /* Hide overflowing text */
-    border-right: 0.15em solid #00eeff; /* Cursor effect */
+    border-right: 0.15em solid #ddfdff; /* Cursor effect */
     animation: blink 0.7s infinite; /* Blinking cursor */
 }
 
 .typing-effect-intro {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #69f5ff46;
     font-size: 1.5rem; /* Smaller text size */
     font-weight: normal; /* Normal weight for less emphasis */
     white-space: wrap; /* Prevent text wrapping */
@@ -197,7 +214,7 @@ footer {
         border-color: transparent;
     }
     50% {
-        border-color: #00eeff;
+        border-color: #ddfdff;
     }
 }
 
