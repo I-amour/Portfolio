@@ -91,65 +91,163 @@ nav a:hover {
 }
 
 .projects-wrapper {
-    position: relative; /* Enable absolute positioning for child elements */
-    overflow: hidden; /* Hide any overflow */
+    position: relative;
+    overflow: hidden;
 }
 
 .projects-container {
     display: flex;
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-    scroll-snap-type: x mandatory; /* Enable snap scrolling */
-    padding: 40px; /* Padding around the container */
-    gap: 20px; /* Space between projects */
+    overflow-x: auto; /* Allow scrolling on Android */
+    scroll-snap-type: x mandatory;
+    padding: 40px;
+    gap: 20px;
+    scroll-behavior: smooth; /* Smooth scrolling */
 }
 
 .project {
-    min-width: 300px; /* Minimum width for project cards */
-    min-height: 300px;
+    max-width: 300px;
+    max-height: 300px;
+    overflow: hidden;
     padding: 1rem;
-    border: 1px solid #00ffcc; /* Neon green border for projects */
+    border: 1px solid #00ffcc;
     border-radius: 5px;
-    transition: transform 0.3s ease; /* Animation for scaling */
-    scroll-snap-align: start; /* Snap alignment */
-}
-
-.scroll-button {
-    position: absolute; /* Position buttons absolutely */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    color: white; /* Button text color */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px; /* Padding for the button */
-    cursor: pointer; /* Pointer cursor on hover */
-    z-index: 1; /* Make sure buttons are on top */
-}
-
-.scroll-button.left {
-    left: 0; /* Position left button at the edge */
-}
-
-.scroll-button.right {
-    right: 0; /* Position right button at the edge */
-}
-
-/* Optional: Hover effect for buttons */
-.scroll-button:hover {
-    background-color: rgba(0, 0, 0, 0.7); /* Darken on hover */
+    transition: max-height 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
 }
 
 .project:hover {
-    transform: scale(1.05); /* Scale effect on hover */
+    max-height: 400px;
+    transform: scale(1.05);
+}
+
+/* Modal CSS */
+.modal {
+    visibility:hidden;
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #897cff8c;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #888;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+/* Button Styling Inside Modal */
+.project-button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #00ffcc;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.project-button:hover {
+    background-color: #009999;
+}
+
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 1;
+    transition: transform 0.2s ease; /* Animation for scaling */
+}
+
+.scroll-button.left {
+    left: 0;
+}
+
+.scroll-button.right {
+    right: 0;
+}
+
+.scroll-button::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.scroll-button.left::before {
+    border-width: 15px 20px 15px 0;
+    border-color: transparent white transparent transparent;
+    margin-left: 5px;
+}
+
+.scroll-button.right::before {
+    border-width: 15px 0 15px 20px;
+    border-color: transparent transparent transparent white;
+    margin-right: 5px;
+}
+
+
+.scroll-button:active {
+    transform: translateY(-50%) scale(1.2); 
 }
 
 .project h3 {
-    margin-bottom: 10px; /* Space between title and description */
+    margin-bottom: 10px;
 }
 
 .project p {
-    color: #ccc; /* Slightly lighter text for description */
+    color: #ffffff;
 }
+
 
 footer {
     text-align: center;

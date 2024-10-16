@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Simi's Tech World</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,48 +28,104 @@
 
     <section id="projects" class="section">
         <h2>Projects</h2>
-
-        <div class="projects-wrapper"> <!-- New wrapper for positioning -->
-            <div class="scroll-button left" id="scroll-left">&#9664;</div> <!-- Left scroll button -->
+    
+        <div class="projects-wrapper">
+            <div class="scroll-button left" id="scroll-left"></div> <!-- Left scroll button -->
             <div class="projects-container">
-                <div class="project">
-                    <h3>Project 1</h3>
-                    <p>A brief description of your project goes here.</p>
-                </div>
-                <div class="project">
-                    <h3>Project 2</h3>
-                    <p>A brief description of your project goes here.</p>
-                </div>
-                <div class="project">
-                    <h3>Project 3</h3>
-                    <p>A brief description of your project goes here.</p>
-                </div>
+                
+            <!-- Project 1 -->
+            <div class="project" onclick="openModal('modal1')">
+                <h3>Recipe Blog with Firebase Authentication</h3>
+                <p>Click to learn more about this project.</p>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project" onclick="openModal('modal2')">
+                <h3>Data Analysis on Social Media & Mental Health</h3>
+                <p>Click to learn more about this project.</p>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project" onclick="openModal('modal3')">
+                <h3>Simple To-Do List Application</h3>
+                <p>Click to learn more about this project.</p>
+            </div>
+    
+                <!-- Placeholder for future projects -->
                 <div class="project">
                     <h3>Project 4</h3>
-                    <p>A brief description of your project goes here.</p>
+                    <p>A brief description of your next project goes here.</p>
                 </div>
+    
                 <div class="project">
                     <h3>Project 5</h3>
-                    <p>A brief description of your project goes here.</p>
+                    <p>A brief description of your next project goes here.</p>
                 </div>
+    
                 <div class="project">
                     <h3>Project 6</h3>
-                    <p>A brief description of your project goes here.</p>
+                    <p>A brief description of your next project goes here.</p>
                 </div>
+    
                 <div class="project">
                     <h3>Project 7</h3>
-                    <p>A brief description of your project goes here.</p>
+                    <p>A brief description of your next project goes here.</p>
                 </div>
+    
                 <div class="project">
                     <h3>Project 8</h3>
-                    <p>A brief description of your project goes here.</p>
+                    <p>A brief description of your next project goes here.</p>
                 </div>
             </div>
-            <div class="scroll-button right" id="scroll-right">&#9654;</div> <!-- Right scroll button -->
-        </div>
-
-    </section>
     
+            <div class="scroll-button right" id="scroll-right"></div> <!-- Right scroll button -->
+        </div>
+    </section>
+
+    <!-- Modal 1 -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal('modal1')">&times;</span>
+        <h3>Recipe Blog with Firebase Authentication</h3>
+        <p>
+            This fully functional recipe blog allows users to register and sign in using Firebase Authentication, ensuring secure access and a personalized experience. 
+            Users can share their favorite recipes and engage with the community by commenting on other users' recipes.
+        </p>
+        <strong>Technologies used:</strong> HTML, CSS, JavaScript, Firebase Authentication.
+        <br><br>
+        <button class="project-button" onclick="window.open('https://i-amour.github.io/Recipe-Sign-in-Function-/', '_blank')">Visit the Recipe Blog!</button>
+    </div>
+</div>
+
+<!-- Modal 2 -->
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal('modal2')">&times;</span>
+        <h3>Data Analysis on Social Media & Mental Health</h3>
+        <p>
+            This project presents a deep analysis of the relationship between social media usage and mental health. 
+            I spearheaded the coding efforts to create this visually appealing website that showcases data visualizations, reports, and findings on the topic.
+        </p>
+        <strong>Technologies used:</strong> HTML, CSS, JavaScript, Data Visualization libraries.
+        <br><br>
+        <button class="project-button" onclick="window.open('https://i-amour.github.io/Social-Media-and-Mental-Illness-Data-Analysis/', '_blank')">Explore the Data Analysis Website</a>
+    </div>
+</div>
+
+<!-- Modal 3 -->
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal('modal3')">&times;</span>
+        <h3>Simple To-Do List Application</h3>
+        <p>
+            This is a simple yet functional To-Do list web application, designed to help users manage daily tasks efficiently.
+            Built with the help of YouTube tutorials, this project demonstrates my ability to independently learn and apply web development concepts.
+        </p>
+        <strong>Technologies used:</strong> HTML, CSS, JavaScript.
+        <br><br>
+        <button class="project-button" onclick="window.open('https://i-amour.github.io/To-Do-List-/', '_blank')">Check out the To-Do List App</button>
+    </div>
+</div>
     
     
 

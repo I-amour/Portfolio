@@ -16,7 +16,7 @@ const typingEffect = document.getElementById('typing-effect');
 const typingEffectIntro = document.getElementById('typing-effect-intro');
 
 const mainText = "Hi, I'm Simi...";
-const introText = "I am a passionate Software Engineer, currently enrolled at Loughborough University studying Computer Science, set to graduate in 2027.";
+const introText = "I am a dedicated Software Engineer, currently pursuing a degree in Computer Science at Loughborough University, expected to graduate in 2027. With a strong foundation in software development, I am eager to apply my knowledge and skills to drive innovative solutions in the tech industry.";
 
 function typeWriter(element, text, delay) {
     let index = 0;
@@ -31,24 +31,34 @@ function typeWriter(element, text, delay) {
 }
 
 typeWriter(typingEffect, mainText, 100); // Type main text
-setTimeout(() => typeWriter(typingEffectIntro, introText, 100), mainText.length * 100 + 500); // Type intro text after a delay
+setTimeout(() => typeWriter(typingEffectIntro, introText, 70), mainText.length * 100 + 500); // Type intro text after a delay
 
-// Horizontal scroll for projects section
+
+// Scroll function for the buttons
 document.getElementById('scroll-left').addEventListener('click', function() {
-    document.querySelector('.projects-container').scrollBy({
-        top: 0,
-        left: -250,
-        behavior: 'smooth'
-    });
+  document.querySelector('.projects-container').scrollBy({
+      left: -300, // Adjust scroll distance as needed
+      behavior: 'smooth'
+  });
 });
 
 document.getElementById('scroll-right').addEventListener('click', function() {
-    document.querySelector('.projects-container').scrollBy({
-        top: 0,
-        left: 250,
-        behavior: 'smooth'
-    });
+  document.querySelector('.projects-container').scrollBy({
+      left: 300, // Adjust scroll distance as needed
+      behavior: 'smooth'
+  });
 });
+
+// Function to open the modal
+function openModal(modalId) {
+  document.getElementById(modalId).style.visibility = "visible";
+  document.getElementById(modalId).style.display = "flex";
+}
+
+// Function to close the modal
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
 
 var c = document.getElementById('canv');
 var $ = c.getContext('2d');
