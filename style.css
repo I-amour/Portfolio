@@ -86,7 +86,7 @@ nav a:hover {
     padding: 2rem;
     margin: 1rem;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.116); /* Slightly transparent background */
+    background: rgba(199, 195, 255, 0.363); /* Slightly transparent background */
     overflow-y: auto; /* Allow vertical scrolling for sections with overflow */
 }
 
@@ -316,3 +316,117 @@ footer {
     }
 }
 
+/* Container holding both the typing and roadmap sections */
+#intro-roadmap-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center items vertically */
+    padding: 20px;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Typing Section */
+.typing-section {
+    flex: 1; /* This will make the typing section take up the remaining space */
+    padding: 20px;
+    color: #ffffff;
+}
+
+/*Social Media Section */
+.social-media-links {
+    display: block;
+    justify-content: center; /* Center the icons */
+    align-items: center;
+    margin-top: 20px; /* Space above the icons */
+}
+
+.social-media-links a {
+    color: #ffffff; /* Icon color */
+    margin: 0 15px; /* Space between icons */
+    font-size: 2rem; /* Size of the icons */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.social-media-links a:hover {
+    color: #00ffcc; /* Change color on hover */
+}
+
+
+/* Roadmap Section */
+.roadmap-section {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the items in this section */
+    flex-direction: column;
+    flex-basis: 35%; /* Occupy 35% of the width */
+    padding-right: 50px;
+}
+
+/* Roadmap Styling (as before) */
+.roadmap-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.roadmap-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.roadmap-item .year {
+    margin-right: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.point {
+    width: 20px;
+    height: 20px;
+    background-color: #00ffcc;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.line {
+    width: 2px;
+    height: 80px;
+    background-color: #00ffcc;
+}
+
+.description-box {
+    position: absolute;
+    top: -20px; /* Adjust the vertical position to ensure visibility */
+    right: 110%; /* Adjust this value to fit your layout */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 255, 204, 0.253);
+    color: #ffffff;
+    font-size: 1.2rem;
+    width: 250px;
+    text-align: center;
+    display: none; /* Initially hidden */
+    z-index: 2;
+    animation: fadeIn 0.3s ease;
+}
+
+.roadmap-item:hover .description-box {
+    display: block; /* Show the description box on hover */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
