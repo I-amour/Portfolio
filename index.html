@@ -1,1208 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Simi Olusola - Software Engineer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --dark-bg: #0a0a0a;
-            --card-bg: rgba(255, 255, 255, 0.08);
-            --card-border: rgba(255, 255, 255, 0.2);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --accent-color: #00f2fe;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 10, 0.85);
-            z-index: -1;
-        }
-
-        /* Floating Particles */
-        .particle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(10, 10, 10, 0.95);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gradient);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 2rem;
-            position: relative;
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(3rem, 6vw, 5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-content .subtitle {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .typing-text {
-            color: var(--accent-color);
-            border-right: 2px solid var(--accent-color);
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { border-color: transparent; }
-            51%, 100% { border-color: var(--accent-color); }
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: var(--accent-gradient);
-            color: white;
-            box-shadow: 0 8px 32px rgba(0, 242, 254, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 48px rgba(0, 242, 254, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: var(--glass-bg);
-            transform: translateY(-2px);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .social-links a:hover {
-            background: var(--accent-gradient);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3);
-        }
-
-        /* Timeline Section */
-        .timeline-section {
-            padding: 100px 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-bottom: 4rem;
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--accent-gradient);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            width: 50%;
-            padding: 0 2rem;
-        }
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-            text-align: left;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-dot {
-            right: -10px;
-        }
-
-        .timeline-item:nth-child(even) .timeline-dot {
-            left: -10px;
-        }
-
-        .timeline-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent-color);
-        }
-
-        .timeline-year {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-achievements {
-            list-style: none;
-        }
-
-        .timeline-achievements li {
-            margin-bottom: 0.5rem;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .timeline-achievements li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-        }
-
-        /* Projects Section */
-        .projects-section {
-            padding: 100px 2rem;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .projects-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .project-card:hover::before {
-            left: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-            border-color: var(--accent-color);
-        }
-
-        .project-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-gradient);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            background: rgba(0, 242, 254, 0.2);
-            color: var(--accent-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-links a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .project-links a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 100px 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 3rem;
-            backdrop-filter: blur(10px);
-            margin-top: 2rem;
-        }
-
-        .contact-info {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .contact-email {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--accent-gradient);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .contact-email:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
-        }
-
-        /* Footer */
-        footer {
-            padding: 2rem;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            color: var(--text-secondary);
-            border-top: 1px solid var(--card-border);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                left: 0;
-                text-align: left;
-                padding-left: 50px;
-            }
-
-            .timeline-item .timeline-dot {
-                left: 10px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scroll to top button */
-        .scroll-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--accent-gradient);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-3px);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simi Olusola — Software Engineer</title>
+<meta name="description" content="Simi Olusola. Computer Science at Loughborough, class of 2027. I build things and actually ship them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFAF4; --ink:#14170F; --soft:#5B5F52;
+    --line:#E2DFD0; --green:#1A7F37; --green-soft:#E6F2E9;
+    --red:#CF222E; --red-soft:#FBEBED;
+    --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  ::selection{background:var(--green);color:var(--paper)}
+  html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:'Archivo',sans-serif;font-size:1.02rem;line-height:1.6;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 1.4rem}
+  a{color:inherit}
+
+  /* ---------- top bar ---------- */
+  .bar{
+    border-bottom:1px solid var(--line);
+    font-family:var(--mono);font-size:.8rem;
+    position:sticky;top:0;background:var(--paper);z-index:10;
+  }
+  .bar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:.8rem;padding-bottom:.8rem;gap:1rem;flex-wrap:wrap}
+  .repo-name b{font-weight:600}
+  .branch{color:var(--green)}
+  .bar nav{display:flex;gap:1.3rem}
+  .bar nav a{text-decoration:none;color:var(--soft)}
+  .bar nav a:hover{color:var(--green);text-decoration:underline;text-underline-offset:4px}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:5.5rem 0 4rem;border-bottom:1px solid var(--line)}
+  .hero h1{
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(3rem,10vw,6.2rem);
+    line-height:.95;letter-spacing:-.02em;text-transform:uppercase;
+  }
+  .hero h1 .accent{color:var(--green)}
+  .hero .role{
+    font-family:var(--mono);font-size:.92rem;color:var(--soft);
+    margin:1.4rem 0 1.6rem;
+  }
+  .hero .role .comment{color:var(--green)}
+  .hero p.intro{max-width:56ch;color:var(--ink);font-size:1.08rem}
+  .hero p.intro b{font-weight:600}
+
+  /* the diff block — the signature */
+  .diff{
+    font-family:var(--mono);font-size:.85rem;line-height:1.9;
+    margin-top:2.2rem;border:1px solid var(--line);border-radius:6px;
+    overflow:hidden;max-width:34rem;
+  }
+  .diff .dhead{padding:.4rem .9rem;border-bottom:1px solid var(--line);color:var(--soft);font-size:.78rem}
+  .diff .add{background:var(--green-soft);color:var(--green);padding:0 .9rem}
+  .diff .del{background:var(--red-soft);color:var(--red);padding:0 .9rem;text-decoration:line-through}
+  .diff .ctx{color:var(--soft);padding:0 .9rem}
+
+  .hero .links{display:flex;gap:1.4rem;margin-top:2.2rem;font-family:var(--mono);font-size:.88rem;flex-wrap:wrap}
+  .hero .links a{color:var(--ink);text-decoration:none;border-bottom:2px solid var(--green);padding-bottom:2px;font-weight:600}
+  .hero .links a:hover{color:var(--green)}
+
+  /* ---------- section titles ---------- */
+  section{padding:4.5rem 0;border-bottom:1px solid var(--line)}
+  .cmd{
+    font-family:var(--mono);font-size:.85rem;color:var(--soft);margin-bottom:.4rem;
+  }
+  .cmd::before{content:"$ ";color:var(--green);font-weight:600}
+  h2{
+    font-family:'Archivo Black',sans-serif;font-size:clamp(1.7rem,4.5vw,2.6rem);
+    text-transform:uppercase;letter-spacing:-.01em;margin-bottom:2.2rem;
+  }
+
+  /* ---------- git log timeline ---------- */
+  .log{position:relative;padding-left:1.6rem}
+  .log::before{content:"";position:absolute;left:.35rem;top:.5rem;bottom:.5rem;width:2px;background:var(--line)}
+  .commit{position:relative;margin-bottom:2.4rem}
+  .commit::before{
+    content:"";position:absolute;left:-1.6rem;top:.4rem;width:.75rem;height:.75rem;
+    border-radius:50%;background:var(--paper);border:2.5px solid var(--green);margin-left:.02rem;
+  }
+  .commit.future::before{border-color:var(--soft);border-style:dashed}
+  .commit .meta{font-family:var(--mono);font-size:.78rem;color:var(--soft);margin-bottom:.5rem}
+  .commit .meta .hash{color:var(--green)}
+  .commit .meta .tag{
+    border:1px solid var(--green);color:var(--green);border-radius:20px;
+    padding:.05rem .55rem;margin-left:.5rem;font-size:.72rem;
+  }
+  .commit.future .meta .hash, .commit.future .meta .tag{color:var(--soft);border-color:var(--soft)}
+  .commit ul{list-style:none}
+  .commit li{padding-left:1.2rem;position:relative;margin-bottom:.35rem}
+  .commit li::before{content:"+";position:absolute;left:0;color:var(--green);font-family:var(--mono);font-weight:600}
+  .commit.future li::before{content:"#";color:var(--soft)}
+  .commit.future li{color:var(--soft)}
+
+  /* ---------- projects ---------- */
+  .repos{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+  @media(max-width:660px){.repos{grid-template-columns:1fr}}
+  .repo{
+    border:1px solid var(--line);border-radius:8px;padding:1.5rem;
+    display:flex;flex-direction:column;gap:.8rem;background:#fff;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .repo:hover{border-color:var(--green);transform:translateY(-2px)}
+  @media(prefers-reduced-motion:reduce){.repo:hover{transform:none}}
+  .repo.featured{grid-column:1/-1;background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .repo.featured:hover{border-color:var(--green)}
+  .repo .rname{font-family:var(--mono);font-weight:600;font-size:1rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+  .repo .rname::before{content:"▸";color:var(--green)}
+  .badge{
+    font-size:.68rem;font-family:var(--mono);border-radius:20px;padding:.1rem .6rem;
+    background:var(--green);color:#fff;font-weight:600;letter-spacing:.03em;
+  }
+  .repo p{font-size:.95rem;color:var(--soft)}
+  .repo.featured p{color:#C9CDC0}
+  .repo .tech{font-family:var(--mono);font-size:.75rem;color:var(--soft);margin-top:auto}
+  .repo.featured .tech{color:#8B9184}
+  .repo .rlinks{display:flex;gap:1.2rem;font-family:var(--mono);font-size:.82rem}
+  .repo .rlinks a{text-decoration:none;font-weight:600;border-bottom:2px solid var(--green);padding-bottom:1px}
+  .repo .rlinks a:hover{color:var(--green)}
+  .repo.featured .rlinks a{color:var(--paper)}
+  .repo.featured .rlinks a:hover{color:var(--green)}
+
+  /* ---------- contact ---------- */
+  .contact p{max-width:52ch;margin-bottom:1.8rem}
+  .mailbtn{
+    display:inline-block;font-family:var(--mono);font-weight:600;font-size:1rem;
+    background:var(--green);color:#fff;text-decoration:none;
+    padding:.85rem 1.6rem;border-radius:6px;
+  }
+  .mailbtn:hover{background:#14612A}
+  .contact .alt{font-family:var(--mono);font-size:.85rem;color:var(--soft);margin-top:1.2rem}
+  .contact .alt a{color:var(--ink)}
+  .contact .alt a:hover{color:var(--green)}
+
+  /* ---------- footer ---------- */
+  footer{padding:2.2rem 0 3rem;font-family:var(--mono);font-size:.78rem;color:var(--soft)}
+  footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+</style>
 </head>
 <body>
-    <!-- Background Animation -->
-    <div class="bg-animation"></div>
-    <div class="bg-overlay"></div>
-    
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <div class="logo">Simi Olusola</div>
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#timeline">Journey</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="repo-name"><b>I-amour / simi-olusola</b> <span class="branch">(main)</span></span>
+    <nav>
+      <a href="#log">log</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+      <a href="Simi Olusola - Software Engineer - Resume (2).pdf" download>resume.pdf</a>
     </nav>
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Hi, I'm <span class="typing-text" id="typing-text">Simi</span></h1>
-                <p class="subtitle">Software Engineer & Computer Science Student</p>
-                <p class="hero-description">
-                    I'm a dedicated software engineer currently pursuing Computer Science at Loughborough University. 
-                    I'm passionate about creating innovative solutions and building impactful technology that makes a difference.
-                </p>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fas fa-code"></i>
-                        View My Work
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-envelope"></i>
-                        Get In Touch
-                    </a>
-                </div>
-                <div class="social-links">
-                    <a href="https://github.com/I-amour" target="_blank" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/simi-olusola-08710b351/" target="_blank" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="Simi Olusola - Software Engineer - Resume (2).pdf" download aria-label="Resume">
-                        <i class="fas fa-file-alt"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <!-- Animated elements will be added here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Timeline Section -->
-    <section id="timeline" class="timeline-section">
-        <h2 class="section-title">My Journey</h2>
-        <p class="section-subtitle">From first lines of code to building full-stack applications</p>
-        
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-year">2022</div>
-                    <ul class="timeline-achievements">
-                        <li>Created my first To-Do list website</li>
-                        <li>Attained Google Analytics Beginner Certificate</li>
-                        <li>Started as Social Media Manager & Web Developer at MyPocketSkill</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-year">2023</div>
-                    <ul class="timeline-achievements">
-                        <li>Completed Kode with Klossy Summer Internship</li>
-                        <li>Participated in Girls Who Code Summer Internship</li>
-                        <li>Built a fully functional Recipe Blog with authentication</li>
-                        <li>Developed an Android To-Do List application</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-year">2024</div>
-                    <ul class="timeline-achievements">
-                        <li>Won the prestigious Welsh Sparc Award</li>
-                        <li>Completed A-Levels: Further Maths, Computer Science, and Maths</li>
-                        <li>Started Computer Science degree at Loughborough University</li>
-                    </ul>
-                </div>
-            </div>
-
-                        <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-year">2025</div>
-                    <ul class="timeline-achievements">
-                        <li>Developed Voice Journal - Flutter mobile app with AI sentiment analysis</li>
-                        <li>Implemented speech-to-text functionality and mood tracking</li>
-                        <li>Built cross-platform solution for iOS and Android</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-card">
-                    <div class="timeline-year">2027</div>
-                    <ul class="timeline-achievements">
-                        <li>Expected graduation from Loughborough University</li>
-                        <li>Ready to make an impact in the tech industry</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
-        <div class="projects-container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Showcasing my technical skills and creative problem-solving</p>
-
-            <div class="projects-grid">
-                <div class="project-card">
-    <div class="project-icon">
-        <i class="fas fa-file-alt"></i>
-    </div>
-    <h3 class="project-title">AI-Powered Resume Screener SaaS</h3>
-    <p class="project-description">
-        A modern resume screening app using AI to analyze, score, and provide feedback on resumes.
-        Built with React, FastAPI, and OpenAI for real-time intelligent insights. Supports PDF, DOC, and DOCX uploads.
-    </p>
-    <div class="project-tech">
-        <span class="tech-tag">React</span>
-        <span class="tech-tag">TypeScript</span>
-        <span class="tech-tag">FastAPI</span>
-        <span class="tech-tag">OpenAI</span>
-        <span class="tech-tag">PostgreSQL</span>
-        <span class="tech-tag">Tailwind CSS</span>
-    </div>
-    <div class="project-links">
-        <a href="https://i-amour.github.io/Resume-Screener-SaaS/" target="_blank">
-            <i class="fas fa-globe"></i> Live Demo
-        </a>
-        <a href="https://github.com/I-amour/Resume-Screener-SaaS" target="_blank">
-            <i class="fab fa-github"></i> View Code
-        </a>
-    </div>
+  </div>
 </div>
 
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <h3 class="project-title">Voice Journal – Speak Your Mind</h3>
-                    <p class="project-description">
-                        A Flutter-powered journaling app with voice-to-text functionality and AI sentiment analysis. 
-                        Features mood tracking, privacy-first design, and cross-platform compatibility.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Flutter</span>
-                        <span class="tech-tag">Dart</span>
-                        <span class="tech-tag">Speech-to-Text</span>
-                        <span class="tech-tag">AI/ML</span>
-                        <span class="tech-tag">iOS</span>
-                        <span class="tech-tag">Android</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://appetize.io/app/b_2lvnbwy6iih5k5gbnc4aomqjkq" target="_blank">
-                            <i class="fas fa-mobile-alt"></i> Try on Appetize
-                        </a>
-                        <a href="https://github.com/I-amour/voice_journal" target="_blank">
-                            <i class="fab fa-github"></i> View Code
-                        </a>
-                    </div>
-                </div>
-            
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3 class="project-title">Recipe Blog with Firebase Authentication</h3>
-                    <p class="project-description">
-                        A fully functional recipe sharing platform with secure user authentication, 
-                        real-time comments, and personalized user experiences.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Firebase</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://i-amour.github.io/Recipe-Sign-in-Function-/" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Live Demo
-                        </a>
-                    </div>
-                </div>
+<header class="hero">
+  <div class="wrap">
+    <h1>Simi<br>Olusola<span class="accent">.</span></h1>
+    <p class="role"><span class="comment">//</span> software engineer · computer science @ loughborough · class of 2027</p>
+    <p class="intro">
+      I like the whole journey — the idea, the build, and the part most people skip:
+      <b>actually shipping it to real people.</b> Lately that's meant taking a product from
+      blank file to paying customers, on my own, while somewhere between lectures.
+    </p>
 
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <h3 class="project-title">Social Media & Mental Health Analysis</h3>
-                    <p class="project-description">
-                        A comprehensive data analysis project examining the relationship between 
-                        social media usage and mental health, featuring interactive visualizations.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Data Visualization</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://i-amour.github.io/Social-Media-and-Mental-Illness-Data-Analysis/" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> View Analysis
-                        </a>
-                    </div>
-                </div>
+    <div class="diff" aria-label="A code diff, used as a design element">
+      <div class="dhead">portfolio.css — 2 files changed</div>
+      <div class="del">- background: linear-gradient(135deg, #667eea, #764ba2);</div>
+      <div class="del">- particles.spawn(∞);</div>
+      <div class="add">+ one idea, one accent colour, no template;</div>
+      <div class="add">+ shipped &gt; perfect;</div>
+      <div class="ctx">  /* rewrote this site by hand. felt good. */</div>
+    </div>
 
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <h3 class="project-title">Interactive To-Do List Application</h3>
-                    <p class="project-description">
-                        A clean, intuitive task management application with local storage, 
-                        drag-and-drop functionality, and responsive design.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Local Storage</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://i-amour.github.io/To-Do-List-/" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Try It Out
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <div class="links">
+      <a href="https://github.com/I-amour" target="_blank" rel="noopener">github</a>
+      <a href="https://www.linkedin.com/in/simi-olusola-08710b351/" target="_blank" rel="noopener">linkedin</a>
+      <a href="#projects">work ↓</a>
+    </div>
+  </div>
+</header>
+
+<section id="log">
+  <div class="wrap">
+    <p class="cmd">git log --journey --reverse=false</p>
+    <h2>Commit history</h2>
+
+    <div class="log">
+      <div class="commit future">
+        <p class="meta"><span class="hash">·······</span><span class="tag">2027 · unstaged</span></p>
+        <ul>
+          <li>TODO: graduate from Loughborough University</li>
+          <li>TODO: keep shipping</li>
+        </ul>
+      </div>
+
+      <div class="commit">
+        <p class="meta"><span class="hash" data-hash></span><span class="tag">2026</span></p>
+        <ul>
+          <li>Shipped my first product with actual paying customers — a UK tax toolkit for online sellers (see below)</li>
+          <li>Learned the unglamorous half of software: hosting, launch posts, moderation filters, real users finding real bugs</li>
+        </ul>
+      </div>
+
+      <div class="commit">
+        <p class="meta"><span class="hash" data-hash></span><span class="tag">2025</span></p>
+        <ul>
+          <li>Built Voice Journal — a Flutter app with speech-to-text and AI sentiment analysis</li>
+          <li>Shipped it cross-platform for iOS and Android with mood tracking and a privacy-first design</li>
+        </ul>
+      </div>
+
+      <div class="commit">
+        <p class="meta"><span class="hash" data-hash></span><span class="tag">2024</span></p>
+        <ul>
+          <li>Won the Welsh Sparc Award</li>
+          <li>Finished A-Levels: Maths, Further Maths, Computer Science</li>
+          <li>Started Computer Science at Loughborough University</li>
+        </ul>
+      </div>
+
+      <div class="commit">
+        <p class="meta"><span class="hash" data-hash></span><span class="tag">2023</span></p>
+        <ul>
+          <li>Completed the Kode with Klossy and Girls Who Code summer internships</li>
+          <li>Built a recipe platform with Firebase auth and real-time comments</li>
+          <li>Wrote my first Android app</li>
+        </ul>
+      </div>
+
+      <div class="commit">
+        <p class="meta"><span class="hash" data-hash></span><span class="tag">2022 · initial commit</span></p>
+        <ul>
+          <li>First ever website: a to-do list. Everyone starts somewhere</li>
+          <li>Google Analytics certificate; joined MyPocketSkill as a social media manager & web developer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <p class="cmd">ls projects/ --sort=proudest</p>
+    <h2>Repositories</h2>
+
+    <div class="repos">
+      <div class="repo featured">
+        <p class="rname">side-hustle-tax-toolkit <span class="badge">SHIPPED · LIVE · PAID</span></p>
+        <p>
+          Millions of UK sellers on Vinted, eBay and Etsy don't know if they owe HMRC anything —
+          so I built the answer. A free browser-based tax checker (vanilla JS, no frameworks, no data
+          leaves your device) that computes 2026/27 Self Assessment liability in real time, paired with a
+          formula-driven bookkeeping spreadsheet sold as a paid product. Designed, built, launched and
+          marketed end-to-end by me: the maths, the ledger-book UI, the hosting, the store, the community launch.
+        </p>
+        <p class="tech">javascript · html/css · excel formula engineering · payhip · netlify · actual customers</p>
+        <div class="rlinks">
+          <a href="https://taxch.netlify.app/" target="_blank" rel="noopener">try the checker</a>
+          <a href="https://payhip.com/b/TV64S" target="_blank" rel="noopener">the product</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Let's Connect</h2>
-        <p class="section-subtitle">Ready to collaborate on exciting projects</p>
-        
-        <div class="contact-card">
-            <p class="contact-info">
-                I'm always interested in new opportunities and exciting projects. 
-                Whether you're looking for a software engineer, have a question about my work, 
-                or just want to connect, I'd love to hear from you!
-            </p>
-            <a href="mailto:simi.enquiries@gmail.com" class="contact-email">
-                <i class="fas fa-envelope"></i>
-                simi.enquiries@gmail.com
-            </a>
+      <div class="repo">
+        <p class="rname">resume-screener-saas</p>
+        <p>AI-powered resume screening — upload a PDF/DOC and get scored, structured feedback in real time. React front, FastAPI back, OpenAI in the middle.</p>
+        <p class="tech">react · typescript · fastapi · openai · postgresql · tailwind</p>
+        <div class="rlinks">
+          <a href="https://i-amour.github.io/Resume-Screener-SaaS/" target="_blank" rel="noopener">live demo</a>
+          <a href="https://github.com/I-amour/Resume-Screener-SaaS" target="_blank" rel="noopener">code</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Simi Olusola. Crafted with passion and attention to detail.</p>
-    </footer>
+      <div class="repo">
+        <p class="rname">voice-journal</p>
+        <p>Speak your mind, literally — a Flutter journaling app that turns voice into text, reads the mood with AI sentiment analysis, and keeps it all on-device.</p>
+        <p class="tech">flutter · dart · speech-to-text · on-device ML · ios · android</p>
+        <div class="rlinks">
+          <a href="https://appetize.io/app/b_2lvnbwy6iih5k5gbnc4aomqjkq" target="_blank" rel="noopener">try it</a>
+          <a href="https://github.com/I-amour/voice_journal" target="_blank" rel="noopener">code</a>
+        </div>
+      </div>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+      <div class="repo">
+        <p class="rname">recipe-platform</p>
+        <p>A recipe sharing site with proper Firebase authentication, per-user experiences and real-time comments — my first taste of building for more than one user.</p>
+        <p class="tech">javascript · firebase auth · realtime db · html/css</p>
+        <div class="rlinks">
+          <a href="https://i-amour.github.io/Recipe-Sign-in-Function-/" target="_blank" rel="noopener">live demo</a>
+        </div>
+      </div>
 
-    <script>
-       // Typing effect
-const typingText = document.getElementById('typing-text');
-const words = ['Simi', 'a Developer', 'an Engineer', 'a Problem Solver'];
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+      <div class="repo">
+        <p class="rname">social-media-x-mental-health</p>
+        <p>Data analysis of the relationship between social media use and mental health, with interactive visualisations that let you explore the dataset yourself.</p>
+        <p class="tech">javascript · data visualisation · statistics</p>
+        <div class="rlinks">
+          <a href="https://i-amour.github.io/Social-Media-and-Mental-Illness-Data-Analysis/" target="_blank" rel="noopener">view analysis</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-function typeWriter() {
-    const currentWord = words[wordIndex];
-    
-    if (isDeleting) {
-        typingText.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        typingText.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-    }
+<section id="contact" class="contact">
+  <div class="wrap">
+    <p class="cmd">whoami --contact</p>
+    <h2>Merge requests welcome</h2>
+    <p>
+      Internships, grad roles, interesting projects, or just a good conversation about
+      building things — my inbox is open and I actually reply.
+    </p>
+    <a class="mailbtn" href="mailto:simi.enquiries@gmail.com">simi.enquiries@gmail.com</a>
+    <p class="alt">
+      or find me on <a href="https://github.com/I-amour" target="_blank" rel="noopener">github</a> ·
+      <a href="https://www.linkedin.com/in/simi-olusola-08710b351/" target="_blank" rel="noopener">linkedin</a> ·
+      <a href="Simi Olusola - Software Engineer - Resume (2).pdf" download>resume.pdf</a>
+    </p>
+  </div>
+</section>
 
-    let typeSpeed = isDeleting ? 100 : 200;
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Simi Olusola</span>
+    <span>hand-written html & css — no template, no page builder, one green</span>
+  </div>
+</footer>
 
-    if (!isDeleting && charIndex === currentWord.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        typeSpeed = 500;
-    }
-
-    setTimeout(typeWriter, typeSpeed);
-}
-
-// Start typing effect
-typeWriter();
-
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    const scrollTop = document.getElementById('scrollTop');
-    
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-        scrollTop.classList.add('visible');
-    } else {
-        navbar.classList.remove('scrolled');
-        scrollTop.classList.remove('visible');
-    }
-});
-
-// Smooth scrolling for navigation
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Scroll to top
-document.getElementById('scrollTop').addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Floating particles
-function createParticle() {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-    particle.style.opacity = Math.random() * 0.5 + 0.2;
-    document.body.appendChild(particle);
-
-    setTimeout(() => {
-        particle.remove();
-    }, 20000);
-}
-
-// Create particles periodically
-setInterval(createParticle, 2000);
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe timeline items and project cards for animations
-document.querySelectorAll('.timeline-item, .project-card').forEach(item => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(30px)';
-    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(item);
-});
-
-// Add hover effects for project cards
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// Timeline item stagger animation
-const timelineItems = document.querySelectorAll('.timeline-item');
-timelineItems.forEach((item, index) => {
-    item.style.animationDelay = `${index * 0.2}s`;
-});
-
-// Add click effect to buttons
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            width: ${size}px;
-            height: ${size}px;
-            left: ${x}px;
-            top: ${y}px;
-            pointer-events: none;
-        `;
-        
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-});
-
-// Add CSS for ripple animation
-const rippleStyle = document.createElement('style');
-rippleStyle.textContent = `
-    @keyframes ripple {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(rippleStyle);
-
-// Enhanced parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-    
-    if (hero && heroContent) {
-        heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
-
-// Add loading animation for images
-document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('load', function() {
-        this.style.opacity = '1';
-        this.style.transform = 'scale(1)';
-    });
-    
-    img.style.opacity = '0';
-    img.style.transform = 'scale(0.8)';
-    img.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-});
-
-// Mobile menu toggle (if needed for responsive design)
-const createMobileMenu = () => {
-    const nav = document.querySelector('nav');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (window.innerWidth <= 768) {
-        const menuToggle = document.createElement('button');
-        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        menuToggle.className = 'menu-toggle';
-        menuToggle.style.cssText = `
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: block;
-        `;
-        
-        const navContainer = document.querySelector('.nav-container');
-        navContainer.appendChild(menuToggle);
-        
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('mobile-open');
-        });
-    }
-};
-
-// Call mobile menu creation on load and resize
-window.addEventListener('load', createMobileMenu);
-window.addEventListener('resize', createMobileMenu);
-
-// Add CSS for mobile menu
-const mobileMenuStyle = document.createElement('style');
-mobileMenuStyle.textContent = `
-    @media (max-width: 768px) {
-        .nav-links {
-            position: fixed;
-            top: 70px;
-            right: -100%;
-            width: 100%;
-            height: calc(100vh - 70px);
-            background: var(--dark-bg);
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: right 0.3s ease;
-            z-index: 999;
-        }
-        
-        .nav-links.mobile-open {
-            right: 0;
-            display: flex;
-        }
-        
-        .nav-links li {
-            margin: 1rem 0;
-        }
-        
-        .nav-links a {
-            font-size: 1.5rem;
-        }
-    }
-`;
-document.head.appendChild(mobileMenuStyle);
-
-// Preloader (optional)
-window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 300);
-    }
-});
-
-// Add smooth reveal animation for sections
-const revealSections = () => {
-    const sections = document.querySelectorAll('section');
-    const windowHeight = window.innerHeight;
-    
-    sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const revealPoint = 150;
-        
-        if (sectionTop < windowHeight - revealPoint) {
-            section.classList.add('revealed');
-        }
-    });
-};
-
-window.addEventListener('scroll', revealSections);
-window.addEventListener('load', revealSections);
-
-// Add CSS for section reveal animation
-const revealStyle = document.createElement('style');
-revealStyle.textContent = `
-    section {
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    
-    section.revealed {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    #hero {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`;
-document.head.appendChild(revealStyle);
-    </script>
+<script>
+  // each visit gets fresh commit hashes — a tiny easter egg for anyone who notices
+  document.querySelectorAll('[data-hash]').forEach(el=>{
+    el.textContent = Array.from({length:7},()=>'0123456789abcdef'[Math.floor(Math.random()*16)]).join('');
+  });
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
